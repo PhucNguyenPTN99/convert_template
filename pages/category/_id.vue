@@ -108,9 +108,9 @@
         },
 
         computed: {
-            ...mapState({
-                news: state => state.news
-            })
+            ...mapState(
+                ['homes', 'news']
+            )
         }
     }
 </script>

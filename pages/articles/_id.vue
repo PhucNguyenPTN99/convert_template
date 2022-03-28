@@ -23,14 +23,14 @@
                             <div class="single-post-media">
                                 <img src="~/assets/upload/market_blog_06.jpg" alt="" class="img-fluid">
                             </div>
-                            <div class="blog-content" v-for="article of news.articles" :key="article.source.id">  
+                            <div class="blog-content">  
                                 <div class="pp">
-                                    <p>{{article.description}}</p>
-                                    <h3><strong>{{article.title}}</strong></h3>
-                                    <p>{{article.content}}</p>
-                                    <p>{{article.publishedAt}}</p>
+                                    <h3><strong>{{news.title}}</strong></h3>
+                                    <p v-html="news.description"></p>
+                                    <!-- <p>{{news.content}}</p> -->
+                                    <p>{{news.publish_date}}</p>
                                 </div>
-                                <img :src="article.urlToImage" alt="" class="img-fluid img-fullwidth">
+                                <img :src="news.banner_image" alt="" class="img-fluid img-fullwidth">
                             </div>
                             <div class="blog-title-area">
                                 <Tags></Tags>
@@ -74,7 +74,8 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+    import axios from 'axios'
+    import {mapState, mapActions} from 'vuex'
     import Footer from '~/components/Footer'
     import PopularCategories from '~/components/PopularCategories'
     import InstagramFeed from '~/components/InstagramFeed'
@@ -90,7 +91,6 @@
     import Author from '~/components/Author'
     import {init} from '../share'
     export default {
-        fetch: init,
         components: {
             Footer,
             PopularCategories,
@@ -107,10 +107,11 @@
             Author
         },
 
-        computed: {
-            ...mapState(
-                ['homes', 'news']
-            )
+        async asyncData({params}) {
+            const {data} = await axios.get(`http://127.0.0.1:8000/api/articles/${params.id}`)
+        return {
+            news:data
+        }
         }
     }
 </script>

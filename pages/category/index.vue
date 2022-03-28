@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="blog-meta big-meta text-center" >
                                         <PostShare></PostShare>
-                                        <h4><nuxt-link :to="'/blogs/' + article.source.id">{{article.title}}</nuxt-link></h4>
+                                        <h4><nuxt-link :to="'/category/' + article.source.id">{{article.title}}</nuxt-link></h4>
                                         <p>{{article.description}}</p>
                                     </div>
                                 </div>
@@ -89,10 +89,9 @@
         },
 
         computed: {
-            ...mapState({
-                homes: state => state.homes,
-                news: state => state.news
-            })
+            ...mapState(
+                ['homes', 'news']
+            )
         }
     }
 </script>

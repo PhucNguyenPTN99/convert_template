@@ -21,11 +21,11 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-wrapper">
-                            <div class="blog-custom-build" v-for="article of news.articles" :key="article.id">
+                            <div class="blog-custom-build" v-for="article of news" :key="article.id">
                                 <div class="blog-box wow fadeIn">
                                     <div class="post-media">
                                         <a href="marketing-single.html" title="">
-                                            <img :src="article.urlToImage" alt="" class="img-fluid">
+                                            <img :src="article.banner_image" alt="" class="img-fluid">
                                             <div class="hovereffect">
                                                 <span></span>
                                             </div>
@@ -33,8 +33,8 @@
                                     </div>
                                     <div class="blog-meta big-meta text-center" >
                                         <PostShare></PostShare>
-                                        <h4><nuxt-link :to="'/blogs/' + article.source.id">{{article.title}}</nuxt-link></h4>
-                                        <p>{{article.description}}</p>
+                                        <h4><nuxt-link :to="'/articles/' + article.id">{{article.title}}</nuxt-link></h4>
+                                        <p v-html="article.description"></p>
                                     </div>
                                 </div>
                                 <hr class="invis">
@@ -87,7 +87,7 @@
         ...mapState(
             ['homes', 'news']
         )
-    }
+    },
 
 }
 </script>
